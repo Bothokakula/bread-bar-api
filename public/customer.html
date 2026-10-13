@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bread Bar – Customer app</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%8D%95%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/customer.css">
+</head>
+<body>
+  <div class="phone">
+    <!-- Log in / Create account -->
+    <section class="screen" data-screen="auth" hidden>
+      <header class="brand">
+        <div class="brand-mark" aria-hidden="true">🍕</div>
+        <h1>Bread Bar</h1>
+        <p>Order your Eden Park favourites and earn points every time.</p>
+      </header>
+
+      <div class="tabbed">
+        <div class="chips" role="tablist" aria-label="Account">
+          <button class="chip" role="tab" data-tab="login" aria-selected="true">Log in</button>
+          <button class="chip" role="tab" data-tab="register" aria-selected="false">Create account</button>
+        </div>
+
+        <p class="notice" id="session-notice" hidden></p>
+
+        <form class="form" id="login-form" data-panel="login" novalidate>
+          <p class="form-error" role="alert" hidden></p>
+          <div class="field">
+            <label for="login-email">Email</label>
+            <input id="login-email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="login-password">Password</label>
+            <input id="login-password" name="password" type="password" autocomplete="current-password" required>
+          </div>
+          <button class="btn btn-primary btn-block" type="submit">Log in</button>
+        </form>
+
+        <form class="form" id="register-form" data-panel="register" novalidate hidden>
+          <p class="form-error" role="alert" hidden></p>
+          <div class="field">
+            <label for="reg-name">Full name</label>
+            <input id="reg-name" name="name" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="reg-email">Email</label>
+            <input id="reg-email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="reg-phone">Mobile number <span class="hint">(optional)</span></label>
+            <input id="reg-phone" name="phone" type="tel" autocomplete="tel" placeholder="073 555 0142">
+          </div>
+          <div class="field">
+            <label for="reg-password">Password</label>
+            <input id="reg-password" name="password" type="password" autocomplete="new-password" required>
+            <p class="hint">At least 8 characters, with an uppercase letter, a lowercase letter and a number.</p>
+          </div>
+          <button class="btn btn-primary btn-block" type="submit">Create account</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Profile (signed in) -->
+    <section class="screen" data-screen="profile" hidden>
+      <header class="profile-head">
+        <div class="avatar" id="avatar" aria-hidden="true"></div>
+        <div>
+          <h1 id="profile-name"></h1>
+          <p class="muted" id="profile-contact"></p>
+        </div>
+      </header>
+
+      <div class="points">
+        <p class="points-value mono"><span id="points">0</span> pts</p>
+        <p class="points-note">You earn points on every order you collect or have delivered.</p>
+      </div>
+
+      <h2 class="section-title">Order history</h2>
+      <div id="orders" class="list"></div>
+
+      <h2 class="section-title">Account</h2>
+      <div class="list">
+        <button class="row-btn" id="logout">
+          <span aria-hidden="true">🚪</span> Log out
+        </button>
+        <button class="row-btn" id="logout-all">
+          <span aria-hidden="true">📱</span> Log out on all devices
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <p class="back"><a href="/">Back to app choice</a></p>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/customer.js"></script>
+</body>
+</html>

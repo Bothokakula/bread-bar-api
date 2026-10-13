@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bread Bar – Business app</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%8D%95%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/business.css">
+</head>
+<body>
+
+  <!-- ================= Sign-in area ================= -->
+  <div class="auth" data-screen="auth" hidden>
+    <aside class="auth-side">
+      <a href="/" class="wordmark">Bread Bar</a>
+      <div>
+        <h1>Business app</h1>
+        <p>For Bread Bar staff only. You'll need your password and your personal 6-digit staff PIN.</p>
+        <p>New to the team? Ask the owner or a manager for an invite code.</p>
+      </div>
+    </aside>
+
+    <main class="auth-main tabbed">
+      <div class="chips" role="tablist" aria-label="Staff access">
+        <button class="chip" role="tab" data-tab="login" aria-selected="true">Staff log in</button>
+        <button class="chip" role="tab" data-tab="join" aria-selected="false">Join with invite code</button>
+        <button class="chip" role="tab" data-tab="setup" aria-selected="false">Owner setup</button>
+      </div>
+
+      <p class="notice" id="session-notice" hidden></p>
+
+      <form class="form" id="login-form" data-panel="login" novalidate>
+        <h2>Log in</h2>
+        <p class="form-error" role="alert" hidden></p>
+        <div class="field">
+          <label for="login-email">Work email</label>
+          <input id="login-email" name="email" type="email" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="login-password">Password</label>
+          <input id="login-password" name="password" type="password" autocomplete="current-password" required>
+        </div>
+          <div class="field">
+            <label for="login-pin">Staff PIN</label>
+            <input id="login-pin" name="pin" class="pin-input" type="password" inputmode="numeric" maxlength="6" pattern="\d{6}" autocomplete="off" required>
+            
+          </div>
+        <button class="btn btn-primary" type="submit">Log in</button>
+      </form>
+
+      <form class="form" id="join-form" data-panel="join" novalidate hidden>
+        <h2>Join the team</h2>
+        <p class="muted">Use the invite code the owner or manager gave you, with the same email they used.</p>
+        <p class="form-error" role="alert" hidden></p>
+        <div class="field">
+          <label for="join-code">Invite code</label>
+          <input id="join-code" name="inviteCode" class="code-input" placeholder="BB-XXXX-XXXX-XXXX" autocomplete="off" spellcheck="false" required>
+        </div>
+        <div class="field">
+          <label for="join-name">Full name</label>
+          <input id="join-name" name="name" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="join-email">Work email</label>
+          <input id="join-email" name="email" type="email" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="join-password">Password</label>
+          <input id="join-password" name="password" type="password" autocomplete="new-password" required>
+          <p class="hint">At least 8 characters, with an uppercase letter, a lowercase letter and a number.</p>
+        </div>
+          <div class="field">
+            <label for="join-pin">Choose a 6-digit staff PIN</label>
+            <input id="join-pin" name="pin" class="pin-input" type="password" inputmode="numeric" maxlength="6" pattern="\d{6}" autocomplete="off" required>
+            <p class="hint">You will enter this every time you log in. Avoid 123456 or repeated digits.</p>
+          </div>
+        <button class="btn btn-primary" type="submit">Join the team</button>
+      </form>
+
+      <form class="form" id="setup-form" data-panel="setup" novalidate hidden>
+        <h2>Owner setup</h2>
+        <p class="muted">Done once, by the owner, using the Business Setup Key from the server's .env file.</p>
+        <p class="form-error" role="alert" hidden></p>
+        <div class="field">
+          <label for="setup-key">Business Setup Key</label>
+          <input id="setup-key" name="setupKey" type="password" autocomplete="off" required>
+        </div>
+        <div class="field">
+          <label for="setup-name">Owner's full name</label>
+          <input id="setup-name" name="name" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="setup-email">Email</label>
+          <input id="setup-email" name="email" type="email" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="setup-password">Password</label>
+          <input id="setup-password" name="password" type="password" autocomplete="new-password" required>
+          <p class="hint">At least 8 characters, with an uppercase letter, a lowercase letter and a number.</p>
+        </div>
+          <div class="field">
+            <label for="setup-pin">Choose a 6-digit staff PIN</label>
+            <input id="setup-pin" name="pin" class="pin-input" type="password" inputmode="numeric" maxlength="6" pattern="\d{6}" autocomplete="off" required>
+            
+          </div>
+        <button class="btn btn-primary" type="submit">Create owner account</button>
+      </form>
+    </main>
+  </div>
+
+  <!-- ================= Dashboard ================= -->
+  <div class="dash" data-screen="dashboard" hidden>
+    <header class="topbar">
+      <span class="wordmark">Bread Bar</span>
+      <div class="who">
+        <span id="me-name"></span>
+        <span class="pill" id="me-role"></span>
+        <button class="btn btn-small btn-quiet-dark" id="logout">Log out</button>
+      </div>
+    </header>
+
+    <main class="dash-main">
+      <h1 id="greeting"></h1>
+      <p class="muted" id="role-summary"></p>
+
+      <div class="dash-grid">
+        <section class="panel" data-perm="staff:invite">
+          <h2>Invite a staff member</h2>
+          <p class="muted">They'll need this code to create their account. It works once, only with this email, for 48 hours.</p>
+          <form class="form" id="invite-form" novalidate>
+            <p class="form-error" role="alert" hidden></p>
+            <div class="field">
+              <label for="invite-email">Their email</label>
+              <input id="invite-email" name="email" type="email" required>
+            </div>
+            <div class="field">
+              <label for="invite-role">Role</label>
+              <select id="invite-role" name="role"></select>
+            </div>
+            <button class="btn btn-dark" type="submit">Create invite code</button>
+          </form>
+          <div id="ticket-slot"></div>
+        </section>
+
+        <section class="panel panel-team" data-perm="staff:read">
+          <h2>Team</h2>
+          <div class="table-wrap"><table class="table" id="team"></table></div>
+        </section>
+
+        <section class="panel" data-perm="orders:read">
+          <h2>Latest orders</h2>
+          <div id="orders" class="stack"></div>
+        </section>
+
+        <section class="panel" data-perm="deliveries:read_assigned">
+          <h2>Your deliveries</h2>
+          <div id="deliveries" class="stack"></div>
+        </section>
+
+        <section class="panel panel-wide" data-perm="audit:read">
+          <h2>Activity log</h2>
+          <p class="muted">Sign-ins, invites and account changes, newest first.</p>
+          <div class="table-wrap"><table class="table" id="audit"></table></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/business.js"></script>
+</body>
+</html>

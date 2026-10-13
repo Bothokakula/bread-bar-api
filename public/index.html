@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bread Bar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%8D%95%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    body { background: var(--cream); min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+    .landing { width: min(100%, 760px); }
+    .wordmark { font-size: clamp(3rem, 9vw, 5.5rem); font-weight: 800; letter-spacing: -0.04em; line-height: .95; }
+    .wordmark span { display: block; color: var(--red); }
+    .lede { margin-top: 18px; font-size: 1.125rem; color: var(--muted); max-width: 44ch; }
+    .doors { margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .door { display: grid; gap: 8px; padding: 26px 24px; border-radius: 22px; text-decoration: none; }
+    .door h2 { font-size: 1.5rem; }
+    .door p { font-size: .9375rem; }
+    .door-customer { background: var(--red); color: #fff; }
+    .door-customer:hover { background: var(--red-press); }
+    .door-business { background: var(--ink); color: var(--cream); }
+    .door-business:hover { background: var(--ink-soft); }
+    .door .emoji { font-size: 2rem; }
+    @media (max-width: 560px) { .doors { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main class="landing">
+    <h1 class="wordmark">Bread<span>Bar</span></h1>
+    <p class="lede">Pizzas, burgers and grills from Eden Park. Choose which app to open.</p>
+    <div class="doors">
+      <a class="door door-customer" href="/customer.html">
+        <span class="emoji" aria-hidden="true">🍕</span>
+        <h2>Customer app</h2>
+        <p>Create an account, log in and see your loyalty points and orders.</p>
+      </a>
+      <a class="door door-business" href="/business.html">
+        <span class="emoji" aria-hidden="true">🧾</span>
+        <h2>Business app</h2>
+        <p>For the owner and staff. Needs your password and staff PIN.</p>
+      </a>
+    </div>
+  </main>
+</body>
+</html>
